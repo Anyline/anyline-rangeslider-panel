@@ -1,0 +1,30 @@
+{
+  "$schema": "https://raw.githubusercontent.com/grafana/grafana/main/docs/sources/developers/plugins/plugin.schema.json",
+  "type": "panel",
+  "name": "Range Slider Panel",
+  "id": "anyline-rangeslider-panel",
+  "info": {
+    "keywords": ["panel"],
+    "description": "A dynamic range slider panel for Grafana that allows users to select a value range for filtering data.",
+    "author": {
+      "name": "Anyline"
+    },
+    "logos": {
+      "small": "img/logo.svg",
+      "large": "img/logo.svg"
+    },
+    "links": [
+      {
+        "name": "GitHub",
+        "url": "https://github.com/Anyline/anyline-rangeslider-panel"
+      }
+    ],
+    "screenshots": [],
+    "version": "1.0.0",
+    "updated": "2024-01-08"
+  },
+  "dependencies": {
+    "grafanaDependency": ">=10.0.3",
+    "plugins": []
+  }
+}
