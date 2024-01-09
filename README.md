@@ -39,7 +39,7 @@ After installation, you can add the Range Slider Panel to any dashboard:
 
 ## License
 
-This plugin is released under the [Apache 2.0 License](LICENSE).
+This plugin is released under the [Apache 2.0 License](https://github.com/Anyline/anyline-rangeslider-panel/blob/main/LICENSE).
 
 ## Author
 
