@@ -1,5 +1,7 @@
 # Range Slider Panel Plugin for Grafana
 
+<img width="1105" alt="Screenshot 2024-01-22 at 10 26 40" src="https://github.com/Anyline/anyline-rangeslider-panel/assets/156062632/206268af-7a4c-4ebf-bf75-a607e0949db7">
+
 ## Description
 
 The Range Slider Panel Plugin is an interactive slider component for Grafana that allows users to dynamically select a range of values to filter dashboard data. It's especially useful for creating more interactive and user-friendly dashboards. This plugin can be adapted to various data sources and supports customizing range formats, making it ideal for use with both SQL and NoSQL databases.
@@ -43,4 +45,4 @@ This plugin is released under the [Apache 2.0 License](https://github.com/Anylin
 
 ## Author
 
-Aditya Singh
+Anyline GmbH

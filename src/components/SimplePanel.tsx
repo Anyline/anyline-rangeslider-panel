@@ -4,6 +4,10 @@ import MultiRangeSlider from 'multi-range-slider-react';
 import { locationService } from '@grafana/runtime';
 import { SimpleOptions } from '../types';
 
+const DEFAULT_PREFIX = "["
+const DEFAUT_DELIMITER = "TO"
+const DEFAULT_SUFFIX = "]"
+
 type RangeChangeEvent = {
   minValue: number;
   maxValue: number;
@@ -12,6 +16,7 @@ type RangeChangeEvent = {
 interface Props extends PanelProps<SimpleOptions> {}
 
 const SimplePanel: React.FC<Props> = ({ options }) => {
+
   const handleInput = (e: RangeChangeEvent) => {
     const { minValue, maxValue } = e;
     let variableValue;
@@ -19,7 +24,7 @@ const SimplePanel: React.FC<Props> = ({ options }) => {
     if (minValue === maxValue) {
       variableValue = `${minValue}`;
     } else {
-      variableValue = `${options.rangePrefix}${minValue} ${options.rangeDelimiter} ${maxValue}${options.rangeSuffix}`;
+      variableValue = `${options.rangePrefix || DEFAULT_PREFIX}${minValue} ${options.rangeDelimiter || DEFAUT_DELIMITER} ${maxValue}${options.rangeSuffix || DEFAULT_SUFFIX}`;
     }
 
     locationService.partial({ [`var-${options.variableName}`]: variableValue }, true);

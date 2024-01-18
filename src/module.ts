@@ -1,14 +1,22 @@
 import { PanelPlugin } from '@grafana/data';
 import { SimpleOptions } from './types';
 import SimplePanel from './components/SimplePanel';
+import { getTemplateSrv } from '@grafana/runtime';
 
 export const plugin = new PanelPlugin<SimpleOptions>(SimplePanel).setPanelOptions((builder) => {
   return builder
-    .addTextInput({
+    .addSelect({
       path: 'variableName',
       name: 'Variable Name',
       description: 'The name of the variable to update',
-      defaultValue: 'myFirstVariable',
+      settings: {
+        options: getTemplateSrv().getVariables().map(e => {
+          return {
+            label: e.name,
+            value: e.name
+          }
+        }),
+      },
     })
     .addTextInput({
       path: 'variableLabel',
@@ -53,5 +61,5 @@ export const plugin = new PanelPlugin<SimpleOptions>(SimplePanel).setPanelOption
       name: 'Range Delimiter',
       description: 'Delimiter for the range (e.g., "TO" for lucene queries)',
       defaultValue: 'TO',
-    });
+    })
 });
