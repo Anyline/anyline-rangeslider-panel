@@ -30,12 +30,15 @@ After installation, you can add the Range Slider Panel to any dashboard:
 2. Add a new panel and select the Range Slider Panel from the visualization options.
 3. In the panel settings, configure the following options:
 
-   - `Variable Name`: Specify the name of the variable that will be controlled by the slider.
+   - `Variable Name`: Select the textbox type variable that will be controlled by the slider.
+   - `Variable Label`: Variable label that is shown on the panel 
+   - `Minimum Threshold`: Lower threshold for the variable
+   - `Maximum Threshold`: Upper threshold for the variable
    - `Default Minimum Value`: Set the default minimum value for the slider.
    - `Default Maximum Value`: Set the default maximum value for the slider.
-   - `Range Prefix`: (Optional) Define a prefix for the range (e.g., '[').
-   - `Range Suffix`: (Optional) Define a suffix for the range (e.g., ']').
-   - `Range Delimiter`: (Optional) Specify a delimiter for the range (e.g., 'TO').
+   - `Range Prefix`: Define a prefix for the range (e.g., '[').
+   - `Range Suffix`: Define a suffix for the range (e.g., ']').
+   - `Range Delimiter`: Specify a delimiter for the range (e.g., 'TO').
 
 4. Use the slider to select the range and filter your dashboard data accordingly.
 

@@ -10,7 +10,7 @@ export const plugin = new PanelPlugin<SimpleOptions>(SimplePanel).setPanelOption
       name: 'Variable Name',
       description: 'The name of the variable to update',
       settings: {
-        options: getTemplateSrv().getVariables().map(e => {
+        options: getTemplateSrv().getVariables().filter(e => e.type === "textbox").map(e => {
           return {
             label: e.name,
             value: e.name
