@@ -22,8 +22,16 @@ const SimplePanel: React.FC<Props> = ({ options }) => {
 
 
   const handleInput = (e: RangeChangeEvent) => {
-    const { minValue, maxValue } = e;
+    let { minValue, maxValue } = e;
     let variableValue;
+
+    if(minValue < options.variableMinimumThreshold || minValue > options.variableMaximumThreshold) {
+      minValue = options.variableMinimumThreshold;
+    }
+
+    if(maxValue > options.variableMaximumThreshold || maxValue < options.variableMinimumThreshold) {
+      maxValue = options.variableMaximumThreshold;
+    }
 
     setMinValue(minValue);
     setMaxValue(maxValue);
