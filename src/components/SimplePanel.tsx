@@ -39,7 +39,7 @@ const SimplePanel: React.FC<Props> = ({ options }) => {
     if (minValue === maxValue) {
       variableValue = `${minValue}`;
     } else {
-      variableValue = `${options.rangePrefix || DEFAULT_PREFIX}${minValue} ${options.rangeDelimiter || DEFAUT_DELIMITER} ${maxValue}${options.rangeSuffix || DEFAULT_SUFFIX}`;
+      variableValue = `${options.rangePrefix || DEFAULT_PREFIX}${minValue}${options.delimiterSpace ? ' ' : ''}${options.rangeDelimiter || DEFAUT_DELIMITER}${options.delimiterSpace ? ' ' : ''}${maxValue}${options.rangeSuffix || DEFAULT_SUFFIX}`;
     }
 
     locationService.partial({ [`var-${options.variableName}`]: variableValue }, true);

@@ -62,4 +62,10 @@ export const plugin = new PanelPlugin<SimpleOptions>(SimplePanel).setPanelOption
       description: 'Delimiter for the range (e.g., "TO" for lucene queries)',
       defaultValue: 'TO',
     })
+    .addBooleanSwitch({
+      path: 'delimiterSpace',
+      name: 'Space before and after the delimiter',
+      description: 'Toggle to add/remove space before and after the delimiter',
+      defaultValue: true
+    })
 });

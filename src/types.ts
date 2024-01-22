@@ -8,4 +8,5 @@ export interface SimpleOptions {
   rangePrefix: string;
   rangeSuffix: string;
   rangeDelimiter: string;
+  delimiterSpace: string;
 }
