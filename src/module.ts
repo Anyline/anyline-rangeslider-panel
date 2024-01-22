@@ -37,12 +37,12 @@ export const plugin = new PanelPlugin<SimpleOptions>(SimplePanel).setPanelOption
     .addTextInput({
       path: 'variableDefaultMinimumValue',
       name: 'Default minimum value',
-      defaultValue: '80',
+      defaultValue: '25',
     })
     .addTextInput({
       path: 'variableDefaultMaximumValue',
       name: 'Default maximum value',
-      defaultValue: '100',
+      defaultValue: '75',
     })
     .addTextInput({
       path: 'rangePrefix',
