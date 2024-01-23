@@ -26,6 +26,16 @@ export const plugin = new PanelPlugin<SimpleOptions>(SimplePanel).setPanelOption
       defaultValue: 'My First Variable',
     })
     .addTextInput({
+      path: 'variableMinimumThreshold',
+      name: 'Minimum threshold',
+      defaultValue: '0',
+    })
+    .addTextInput({
+      path: 'variableMaximumThreshold',
+      name: 'Maximum threshold',
+      defaultValue: '100',
+    })
+    .addTextInput({
       path: 'rangePrefix',
       name: 'Range Prefix',
       description: 'Prefix for the range (e.g., "[" for lucene queries)',
