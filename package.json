@@ -1,6 +1,6 @@
 {
   "name": "my-first-plugin",
-  "version": "1.1.4",
+  "version": "1.1.1",
   "description": "Ui for textbox input variable",
   "scripts": {
     "build": "webpack -c ./.config/webpack/webpack.config.ts --env production",
