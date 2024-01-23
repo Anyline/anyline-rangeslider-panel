@@ -4,6 +4,7 @@ import SimplePanel from './components/SimplePanel';
 import { getTemplateSrv } from '@grafana/runtime';
 
 export const plugin = new PanelPlugin<SimpleOptions>(SimplePanel).setPanelOptions((builder) => {
+
   return builder
     .addSelect({
       path: 'variableName',
@@ -23,26 +24,6 @@ export const plugin = new PanelPlugin<SimpleOptions>(SimplePanel).setPanelOption
       name: 'Variable Label',
       description: 'The user-friendly label of the variable',
       defaultValue: 'My First Variable',
-    })
-    .addTextInput({
-      path: 'variableMinimumThreshold',
-      name: 'Minimum threshold',
-      defaultValue: '0',
-    })
-    .addTextInput({
-      path: 'variableMaximumThreshold',
-      name: 'Maximum threshold',
-      defaultValue: '100',
-    })
-    .addTextInput({
-      path: 'variableDefaultMinimumValue',
-      name: 'Default minimum value',
-      defaultValue: '25',
-    })
-    .addTextInput({
-      path: 'variableDefaultMaximumValue',
-      name: 'Default maximum value',
-      defaultValue: '75',
     })
     .addTextInput({
       path: 'rangePrefix',

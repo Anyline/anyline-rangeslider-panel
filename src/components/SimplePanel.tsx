@@ -3,6 +3,7 @@ import { PanelProps } from '@grafana/data';
 import MultiRangeSlider from 'multi-range-slider-react';
 import { locationService } from '@grafana/runtime';
 import { SimpleOptions } from '../types';
+import findMinAndMaxValues from './utils/findMinAndMaxValues';
 
 const DEFAULT_PREFIX = "["
 const DEFAUT_DELIMITER = "TO"
@@ -17,8 +18,14 @@ interface Props extends PanelProps<SimpleOptions> {}
 
 const SimplePanel: React.FC<Props> = ({ options }) => {
 
-  const [_minValue, setMinValue] = useState(0);
-  const [_maxValue, setMaxValue] = useState(0);
+  const urlParams = new URLSearchParams(window.location.search);
+
+  const selectedVariableValue = urlParams.get(`var-${options.variableName}`);
+
+  const { minValue, maxValue } = findMinAndMaxValues(selectedVariableValue);
+
+  const [_minValue, setMinValue] = useState<string>(minValue);
+  const [_maxValue, setMaxValue] = useState<string>(maxValue);
 
 
   const handleInput = (e: RangeChangeEvent) => {
@@ -33,8 +40,8 @@ const SimplePanel: React.FC<Props> = ({ options }) => {
       maxValue = options.variableMaximumThreshold;
     }
 
-    setMinValue(minValue);
-    setMaxValue(maxValue);
+    setMinValue(minValue.toString());
+    setMaxValue(maxValue.toString());
 
     if (minValue === maxValue) {
       variableValue = `${minValue}`;
@@ -55,8 +62,8 @@ const SimplePanel: React.FC<Props> = ({ options }) => {
         ruler={false}
         label={true}
         preventWheel={false}
-        minValue={_minValue || options.variableDefaultMinimumValue}
-        maxValue={_maxValue || options.variableDefaultMaximumValue}
+        minValue={_minValue}
+        maxValue={_maxValue}
         onInput={(e) => {
           handleInput({
             minValue: e.minValue,

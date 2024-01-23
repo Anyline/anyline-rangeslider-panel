@@ -34,8 +34,6 @@ After installation, you can add the Range Slider Panel to any dashboard:
    - `Variable Label`: Variable label that is shown on the panel 
    - `Minimum Threshold`: Lower threshold for the variable
    - `Maximum Threshold`: Upper threshold for the variable
-   - `Default Minimum Value`: Set the default minimum value for the slider.
-   - `Default Maximum Value`: Set the default maximum value for the slider.
    - `Range Prefix`: Define a prefix for the range (e.g., '[').
    - `Range Suffix`: Define a suffix for the range (e.g., ']').
    - `Range Delimiter`: Specify a delimiter for the range (e.g., 'TO').

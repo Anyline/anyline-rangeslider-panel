@@ -4,6 +4,12 @@ All notable changes to the "Range Slider Panel" plugin will be documented in thi
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0] - 2024-01-23
+- Allow only variables of type `textbox` to be selected
+- Remove default min and max values and use the values from the current variable value
+- Fix the bug where setting min and max values above the threshold crashed the panel
+- Add `delimiterSpace` variable to allow adding/removing space before and after the delimeter
+
 ## [1.0.1] - 2024-01-18
 - Add default prefix, delimiter and suffix if it is not defined
 - Allow select of variable from options
