@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import { PanelProps, TypedVariableModel } from '@grafana/data';
+import { PanelProps } from '@grafana/data';
 import MultiRangeSlider from 'multi-range-slider-react';
 import { getTemplateSrv, locationService } from '@grafana/runtime';
 import { SimpleOptions } from '../types';
 import findMinAndMaxValues from './utils/findMinAndMaxValues';
 
-const DEFAULT_PREFIX = '[';
+const DEFAULT_PREFIX = '';
 const DEFAUT_DELIMITER = 'TO';
-const DEFAULT_SUFFIX = ']';
+const DEFAULT_SUFFIX = '';
 
 type RangeChangeEvent = {
   minValue: number;
@@ -17,19 +17,28 @@ type RangeChangeEvent = {
 interface Props extends PanelProps<SimpleOptions> {}
 
 const SimplePanel: React.FC<Props> = ({ options }) => {
-  const selectedVariable = getTemplateSrv()
-    .getVariables()
-    .filter((variable) => {
-      return variable.name === options.variableName;
-    });
+  const selectedVariable =
+    getTemplateSrv()
+      .getVariables()
+      .filter((variable) => {
+        return variable.name === options.variableName;
+      }) || '';
 
-  let selectedVariableValue = null;
+  let selectedVariableValue = '';
 
   if (selectedVariable.length > 0 && 'current' in selectedVariable[0]) {
     selectedVariableValue = selectedVariable[0].current.value as string;
   }
 
-  const { minValue, maxValue } = findMinAndMaxValues(selectedVariableValue);
+  let minValue;
+  let maxValue;
+
+  try {
+    ({ minValue, maxValue } = findMinAndMaxValues(selectedVariableValue));
+  } catch (err) {
+    minValue = '';
+    maxValue = '';
+  }
 
   const [_minValue, setMinValue] = useState<string>(minValue);
   const [_maxValue, setMaxValue] = useState<string>(maxValue);
@@ -60,8 +69,13 @@ const SimplePanel: React.FC<Props> = ({ options }) => {
     locationService.partial({ [`var-${options.variableName}`]: variableValue }, true);
   };
 
-  if (!selectedVariable) {
-    return <div style={{ padding: '8px' }}>No variable selected yet</div>;
+  if (!selectedVariable || !selectedVariableValue || (minValue === '' && maxValue === '')) {
+    return (
+      <div style={{ padding: '8px' }}>
+        No variable selected yet or variable value has incorrect syntax. Please check panel settings to defined range
+        prefix, range suffix and range delimiter.
+      </div>
+    );
   }
 
   return (
