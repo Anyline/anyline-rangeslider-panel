@@ -2,6 +2,13 @@ import { PanelPlugin } from '@grafana/data';
 import { SimpleOptions } from './types';
 import SimplePanel from './components/SimplePanel';
 import { getTemplateSrv } from '@grafana/runtime';
+import {
+  DEFAUT_DELIMITER,
+  DEFAULT_MAX_THRESHOLD,
+  DEFAULT_MIN_THRESHOLD,
+  DEFAULT_PREFIX,
+  DEFAULT_SUFFIX,
+} from 'components/constants';
 
 export const plugin = new PanelPlugin<SimpleOptions>(SimplePanel).setPanelOptions((builder) => {
   return builder
@@ -27,35 +34,40 @@ export const plugin = new PanelPlugin<SimpleOptions>(SimplePanel).setPanelOption
       description: 'The user-friendly label of the variable',
       defaultValue: 'My First Variable',
     })
-    .addTextInput({
+    .addNumberInput({
       path: 'variableMinimumThreshold',
       name: 'Minimum threshold',
-      defaultValue: '0',
+      description: 'Defaults to 0',
+      defaultValue: DEFAULT_MIN_THRESHOLD,
     })
-    .addTextInput({
+    .addNumberInput({
       path: 'variableMaximumThreshold',
       name: 'Maximum threshold',
-      defaultValue: '100',
+      description: 'Defaults to 100',
+      defaultValue: DEFAULT_MAX_THRESHOLD,
     })
     .addTextInput({
       path: 'rangePrefix',
       name: 'Range Prefix',
-      description: 'Prefix for the range (e.g., "[" for lucene queries)',
+      description: 'Defaults to "["',
+      defaultValue: DEFAULT_PREFIX,
     })
     .addTextInput({
       path: 'rangeSuffix',
       name: 'Range Suffix',
-      description: 'Suffix for the range (e.g., "]" for lucene queries)',
+      description: 'Defaults to "]"',
+      defaultValue: DEFAULT_SUFFIX,
     })
     .addTextInput({
       path: 'rangeDelimiter',
       name: 'Range Delimiter',
-      description: 'Delimiter for the range (e.g., "TO" for lucene queries)',
+      description: 'Defaults to "TO"',
+      defaultValue: DEFAUT_DELIMITER,
     })
     .addBooleanSwitch({
-      path: 'delimiterSpace',
+      path: 'shouldHaveDelimiterSpace',
       name: 'Space before and after the delimiter',
-      description: 'Toggle to add/remove space before and after the delimiter',
+      description: 'Adds space by default, toogle to remove space',
       defaultValue: true,
     });
 });
