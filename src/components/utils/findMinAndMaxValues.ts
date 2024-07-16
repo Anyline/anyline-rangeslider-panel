@@ -1,9 +1,23 @@
 export default function findMinAndMaxValues(variableValue: string) {
-  const regex = /^.*?(-?\d+).*?(-?\d+)[^\d]*$/;
-  const matches = variableValue?.match(regex);
+  const numberRegex = /(-?\d+)/;
+  const firstNumberMatch = numberRegex.exec(variableValue);
 
-  if (matches && matches.length >= 3) {
-    return { minValue: matches[1].toString(), maxValue: matches[2].toString() };
+  if (!firstNumberMatch) {
+    throw new Error('Could not find any number');
+  }
+
+  const firstNumber = firstNumberMatch[1];
+  const restOfString = variableValue.slice(firstNumberMatch.index + firstNumber.length);
+
+  const delimiterRegex = /(.+?)(-?\d+)([^\d]*)$/;
+  const delimiterMatch = delimiterRegex.exec(restOfString);
+
+  if (delimiterMatch && delimiterMatch.length >= 3) {
+    return {
+      minValue: firstNumber,
+      delimiter: delimiterMatch[1].trim(),
+      maxValue: delimiterMatch[2],
+    };
   } else {
     throw new Error('Could not find min and max values');
   }
