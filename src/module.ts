@@ -39,12 +39,20 @@ export const plugin = new PanelPlugin<SimpleOptions>(SimplePanel).setPanelOption
       name: 'Minimum threshold',
       description: 'Defaults to 0',
       defaultValue: DEFAULT_MIN_THRESHOLD,
+      settings: {
+        min: Number.MIN_SAFE_INTEGER,
+        max: Number.MAX_SAFE_INTEGER,
+      },
     })
     .addNumberInput({
       path: 'variableMaximumThreshold',
       name: 'Maximum threshold',
       description: 'Defaults to 100',
       defaultValue: DEFAULT_MAX_THRESHOLD,
+      settings: {
+        min: Number.MIN_SAFE_INTEGER,
+        max: Number.MAX_SAFE_INTEGER,
+      },
     })
     .addTextInput({
       path: 'rangePrefix',

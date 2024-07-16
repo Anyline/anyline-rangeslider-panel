@@ -133,6 +133,22 @@ const SimplePanel: React.FC<Props> = ({ options }) => {
     return <div style={{ padding: '8px' }}>Please ensure minimum threshold is less than maximum threshold.</div>;
   }
 
+  if (maxThreshold < panelState.minValue) {
+    return (
+      <div style={{ padding: '8px' }}>
+        Maximum threshold {maxThreshold} cannot be lower than {panelState.minValue}
+      </div>
+    );
+  }
+
+  if (minThreshold > panelState.maxValue) {
+    return (
+      <div style={{ padding: '8px' }}>
+        Minimum threshold {minThreshold} cannot be higher than {panelState.maxValue}
+      </div>
+    );
+  }
+
   return (
     <div style={{ padding: '8px' }}>
       <p>{variableLabel}</p>
