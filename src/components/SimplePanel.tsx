@@ -122,21 +122,21 @@ const SimplePanel: React.FC<Props> = ({ options }) => {
   }, [variableName, updatePanelState, panelState.selectedVariableValue]);
 
   if (!variableName) {
-    return <div style={{ padding: '8px' }}>Please select a variable from panel options.</div>;
+    return <div style={{ padding: '8px' }}>Please select a variable from panel options</div>;
   }
 
   if (panelState.hasErrored) {
-    return <div style={{ padding: '8px' }}>Please ensure variable {variableName} has correct syntax.</div>;
+    return <div style={{ padding: '8px' }}>Variable {variableName} has incorrect range syntax</div>;
   }
 
   if (panelState.isInvalidRange) {
-    return <div style={{ padding: '8px' }}>Please ensure minimum threshold is less than maximum threshold.</div>;
+    return <div style={{ padding: '8px' }}>Minimum value should be less than maximum value</div>;
   }
 
   if (maxThreshold < panelState.minValue) {
     return (
       <div style={{ padding: '8px' }}>
-        Maximum threshold {maxThreshold} cannot be lower than {panelState.minValue}
+        Maximum threshold {maxThreshold} should be lower than {panelState.minValue}
       </div>
     );
   }
