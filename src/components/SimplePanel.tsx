@@ -1,15 +1,10 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { PanelProps } from '@grafana/data';
-import MultiRangeSlider from 'multi-range-slider-react';
 import { getTemplateSrv, locationService } from '@grafana/runtime';
 import { SimpleOptions } from '../types';
 import findMinAndMaxValues from './utils/findMinAndMaxValues';
 import { DEFAULT_MAX_THRESHOLD, DEFAULT_MIN_THRESHOLD } from './constants';
-
-type RangeChangeEvent = {
-  minValue: number;
-  maxValue: number;
-};
+import MultiRangeSlider from './MultiRangeSlider/MultiRangeSlider';
 
 interface Props extends PanelProps<SimpleOptions> {}
 
@@ -41,9 +36,7 @@ const SimplePanel: React.FC<Props> = ({ options }) => {
   }, []);
 
   const handleSliderInput = useCallback(
-    (e: RangeChangeEvent) => {
-      let { minValue, maxValue } = e;
-
+    (minValue: number, maxValue: number) => {
       minValue = Math.max(minThreshold, Math.min(minValue, maxThreshold));
       maxValue = Math.max(minValue, Math.min(maxValue, maxThreshold));
 
@@ -155,13 +148,7 @@ const SimplePanel: React.FC<Props> = ({ options }) => {
       <MultiRangeSlider
         min={minThreshold}
         max={maxThreshold}
-        step={1}
-        ruler={false}
-        label={true}
-        preventWheel={false}
-        minValue={panelState.minValue}
-        maxValue={panelState.maxValue}
-        onInput={handleSliderInput}
+        onChange={({ min, max }: { min: number; max: number }) => handleSliderInput(min, max)}
       />
     </div>
   );
