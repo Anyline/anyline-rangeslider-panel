@@ -4,6 +4,10 @@ All notable changes to the "Range Slider Panel" plugin will be documented in thi
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.6] - 2024-09-08
+
+- Update docker-compose to docker compose to fix Github CI
+
 ## [1.2.5] - 2024-09-08
 
 - Update license to include text Copyright 2023 Anyline GmbH
