@@ -1,10 +1,11 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { PanelProps } from '@grafana/data';
-import { getTemplateSrv, locationService } from '@grafana/runtime';
+import { locationService } from '@grafana/runtime';
 import { SimpleOptions } from '../types';
 import findMinAndMaxValues from './utils/findMinAndMaxValues';
 import { DEFAULT_MAX_THRESHOLD, DEFAULT_MIN_THRESHOLD } from './constants';
 import MultiRangeSlider from './MultiRangeSlider/MultiRangeSlider';
+import { debouncedVariableCheck } from './debouncedVariableCheck';
 
 interface Props extends PanelProps<SimpleOptions> {}
 
@@ -61,21 +62,7 @@ const SimplePanel: React.FC<Props> = ({ options }) => {
   );
 
   useEffect(() => {
-    const updateVariableValue = () => {
-      const variable = getTemplateSrv()
-        .getVariables()
-        .find((v) => v.name === variableName);
-
-      if (!variable || !('current' in variable)) {
-        return;
-      }
-
-      const newValue = variable.current.value as string;
-
-      if (newValue === panelState.selectedVariableValue) {
-        return;
-      }
-
+    const handleSuccess = (newValue: string) => {
       try {
         const { minValue, maxValue } = findMinAndMaxValues(newValue);
         const newMinValue = Number(minValue);
@@ -98,6 +85,7 @@ const SimplePanel: React.FC<Props> = ({ options }) => {
           hasErrored: false,
         });
       } catch (err) {
+        console.error('anyline-rangeslider-plugin', err);
         updatePanelState({
           selectedVariableValue: newValue,
           hasErrored: true,
@@ -105,14 +93,12 @@ const SimplePanel: React.FC<Props> = ({ options }) => {
       }
     };
 
-    updateVariableValue();
-
-    const subscription = locationService.getHistory().listen(updateVariableValue);
-
-    return () => {
-      subscription();
+    const handleError = () => {
+      updatePanelState({ hasErrored: true });
     };
-  }, [variableName, updatePanelState, panelState.selectedVariableValue]);
+
+    debouncedVariableCheck(variableName, handleSuccess, handleError);
+  }, [variableName, updatePanelState]);
 
   if (!variableName) {
     return <div style={{ padding: '8px' }}>Please select a variable from panel options</div>;
