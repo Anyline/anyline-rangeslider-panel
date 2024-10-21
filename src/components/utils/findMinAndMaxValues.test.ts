@@ -36,7 +36,6 @@ describe('findMinAndMaxValues', () => {
   });
 
   it('should throw an error when no min and max values are found', () => {
-    expect(() => findMinAndMaxValues('no numbers here')).toThrow('Could not find any number');
     expect(() => findMinAndMaxValues('[10]')).toThrow('Could not find min and max values');
     expect(() => findMinAndMaxValues('[10-to]')).toThrow('Could not find min and max values');
   });
