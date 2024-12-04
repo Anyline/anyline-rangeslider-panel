@@ -4,6 +4,11 @@ All notable changes to the "Range Slider Panel" plugin will be documented in thi
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.9] - 2024-12-04
+
+- fix: use useMemo to listen to change in min and max values of selected variable and avoid repeated state changes on component mount
+- fix: variable flickers when changing value from right sidebar panel
+
 ## [1.2.7] - 2024-09-26
 
 - Use debounce to retrieve selected textbox variable's value
